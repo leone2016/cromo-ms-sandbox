@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://utr/InitRequest",
+  "title": "InitRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "n1": {
+      "type": "number"
+    },
+    "n2": {
+      "type": "number"
+    }
+  },
+  "required": ["n1", "n2"]
+}

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# direnv settings (https://direnv.net/) "brew install direnv"
+
+# AWS
+export AWS_ACCESS_KEY_ID=*****
+export AWS_SECRET_ACCESS_KEY=*****
+export AWS_REGION=us-east-1
+export SLS_DEBUG=*
+
+# Usrv environment
+export MS_STAGE=dev

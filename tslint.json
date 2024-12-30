@@ -1,0 +1,5 @@
+{
+  "extends": ["utransfer-tslint/tslint.js", "tslint-config-prettier"],
+  "exclude": ["**/lib/**", "**/dist/**", "**/node_modules/**"],
+  "rules": {}
+}

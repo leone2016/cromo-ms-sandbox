@@ -1,0 +1,30 @@
+{
+  "extends": "./node_modules/utransfer-tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "incremental": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "handler/*": ["src/handler/*"],
+      "constant/*": ["src/constant/*"],
+      "error/*": ["src/error/*"],
+      "gateway/*": ["src/gateway/*"],
+      "infrastructure/*": ["src/infrastructure/*"],
+      "middleware/*": ["src/middleware/*"],
+      "repository/*": ["src/repository/*"],
+      "service/*": ["src/service/*"],
+      "types/*": ["types/*"],
+      "soap/*": ["src/soap/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "serverless.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    ".vscode/**/*",
+    ".idea/**/*"
+  ]
+}

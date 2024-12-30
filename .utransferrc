@@ -1,0 +1,15 @@
+{
+  "errorPrefix": "SBOX",
+  "json2ts":{
+    "output": "./types",
+    "remote": [
+      "https://s3.amazonaws.com/utransfer-static/schemas/ms-sandbox/v1/hello_remoto.json"
+    ],
+    "dirs": [
+      "src/schema"
+    ]
+  },
+  "ssm": {
+    "SANDBOX_ENTITY_TRXS":"SANDBOX_ENTITY_TRXS",
+  }
+}
