@@ -1,11 +1,9 @@
 import type { AWS } from "@serverless/typescript";
 
-import { compute } from "./src/handler";
-
 const serverlessConfiguration: AWS = {
   service: "sandbox",
   frameworkVersion: "3",
-  plugins: ["serverless-webpack", "serverless-domain-manager"],
+  plugins: ["serverless-esbuild", "serverless-domain-manager"],
   provider: {
     name: "aws",
     runtime: "nodejs18.x",
@@ -25,7 +23,13 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
   },
-  package: { individually: true, excludeDevDependencies: true },
+  package: {
+    individually: true,
+    excludeDevDependencies: true,
+    patterns: [
+      "src/schema/**"
+    ]
+  },
   custom: {
     version: "v1",
     prefix: "/${self:service}/${self:provider.stage}",
@@ -36,15 +40,38 @@ const serverlessConfiguration: AWS = {
       certificateName: "${ssm:certificate-name-prod}",
       createRoute53Record: false,
     },
-    webpack: {
-      webpackConfig: "./webpack.config.js",
-      packager: "npm",
-      includeModules: {
-        forceExclude: ["aws-sdk"],
-      },
+    esbuild: {
+      bundle: true,
+      minify: true,
+      sourcemap: true,
+      exclude: ["aws-sdk"],
+      target: "node18",
+      define: { "require.resolve": undefined },
+      platform: "node",
+      concurrency: 10,
+      external: [
+        "@nestjs/microservices",
+        "@nestjs/websockets",
+        "cache-manager",
+        "class-transformer",
+        "class-validator"
+      ]
     },
   },
-  functions: { compute },
+  functions: {
+    compute: {
+      handler: "src/lambda.handler",
+      events: [
+        {
+          http: {
+            method: "post",
+            path: "health",
+            cors: true
+          }
+        }
+      ]
+    }
+  },
 };
 
 module.exports = serverlessConfiguration;
