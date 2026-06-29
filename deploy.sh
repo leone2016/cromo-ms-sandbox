@@ -10,7 +10,7 @@ echo " ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚�
 export MS_STAGE=${1:-dev}
 
 # Echo the stage to verify
-echo ":: Development by VIRTUS PROJECT"
+echo ":: Development by NutriPlan Pro"
 echo ":: Deploying to stage: $MS_STAGE"
 echo ":: Ms-sandbox"
 

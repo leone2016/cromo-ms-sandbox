@@ -1,8 +1,8 @@
 # Getting Started
 
 <!--- Here start the README template for the project -->
-# cromo-ms-sandbox
-Base project for cromo-ms-sandbox Microservices
+# nutriplan-sandbox
+Base project for nutriplan-ms-sandbox Microservices
 
 ### Request a PR review
 To request a review left a comment with the text `/review`
