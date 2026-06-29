@@ -6,7 +6,13 @@ import { Observable, of } from "rxjs";
 
 @injectable()
 export class InitService implements IInitService {
-  public compute(event: object): Observable<object> {
-    return of({ test: "HOLA MUNDO" });
+  public compute(event: IAPIGatewayEvent<InitRequest>): Observable<object> {
+    const { n1, n2 } = event.body;
+    return of({
+      n1,
+      n2,
+      result: n1 + n2,
+      test: "HOLA MUNDO",
+    });
   }
 }

@@ -34,7 +34,7 @@ const serverlessConfiguration: AWS = {
       domainName: "${ssm:domain-api-gateway-${self:provider.stage}}",
       stage: "${self:provider.stage}",
       certificateName: "${ssm:certificate-name-prod}",
-      createRoute53Record: false
+      createRoute53Record: false,
     },
     webpack: {
       webpackConfig: "./webpack.config.js",
