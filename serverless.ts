@@ -68,6 +68,13 @@ const serverlessConfiguration: AWS = {
             path: "health",
             cors: true
           }
+        },
+        {
+          http: {
+            method: "get",
+            path: "health",
+            cors: false
+          }
         }
       ]
     }

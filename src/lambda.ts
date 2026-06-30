@@ -22,6 +22,21 @@ async function bootstrap() {
 }
 
 export const handler = async (event: any, context: Context, callback: any) => {
+  const serviceName = process.env.MS_NAME;
+  const prefix = serviceName ? `/${serviceName}` : '';
+
+  if (prefix) {
+    if (event.path && event.path.startsWith(prefix)) {
+      event.path = event.path.substring(prefix.length) || '/';
+    }
+    if (event.requestContext && event.requestContext.path && event.requestContext.path.startsWith(prefix)) {
+      event.requestContext.path = event.requestContext.path.substring(prefix.length) || '/';
+    }
+    if (event.rawPath && event.rawPath.startsWith(prefix)) {
+      event.rawPath = event.rawPath.substring(prefix.length) || '/';
+    }
+  }
+
   const server = await bootstrap();
   return server(event, context, callback);
 };
