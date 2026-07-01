@@ -1,4 +1,4 @@
-import { Injectable, Inject, ConflictException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { DynamoGateway } from '@nutriplan/infrastructure/database/DynamoGateway';
 import { CreateUserRequest } from '@nutriplan/types/create_user_request';
 import { User } from '@nutriplan/types/user';
@@ -6,10 +6,14 @@ import { Observable, throwError } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import * as crypto from 'crypto';
 import { Snowflake } from '@nutriplan/infrastructure/utils/Snowflake';
+import { AppException } from '@nutriplan/infrastructure/AppException';
+import { ERRORS, ErrorCode } from '@nutriplan/infrastructure/ErrorEnum';
+
+import { TABLE_RESOURCES } from '@nutriplan/infrastructure/constants/TableResources';
 
 @Injectable()
 export class UsersService {
-  private readonly tableName = process.env.USERS_TABLE || 'dev-user';
+  private readonly tableName = TABLE_RESOURCES.USERS_TABLE;
 
   constructor(@Inject(DynamoGateway) private readonly dynamoGateway: DynamoGateway) {}
 
@@ -31,7 +35,7 @@ export class UsersService {
     }).pipe(
       switchMap((existingUsers) => {
         if (existingUsers.length > 0) {
-          return throwError(() => new ConflictException('El correo electrónico ya está registrado.'));
+          return throwError(() => new AppException(ERRORS[ErrorCode.E003]));
         }
 
         // 2. Hash password and build User object using Snowflake ID

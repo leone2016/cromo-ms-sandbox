@@ -3,6 +3,7 @@ import { HttpStatus } from '@nestjs/common';
 export enum ErrorCode {
   E001 = "E001",
   E002 = "E002",
+  E003 = "E003",
 }
 
 export interface ErrorDetail {
@@ -21,5 +22,10 @@ export const ERRORS: Record<ErrorCode, ErrorDetail> = {
     code: ErrorCode.E002,
     message: "Ha ocurrido un error inesperado.",
     statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+  },
+  [ErrorCode.E003]: {
+    code: ErrorCode.E003,
+    message: "El correo electrónico ya está registrado.",
+    statusCode: HttpStatus.CONFLICT,
   },
 };
