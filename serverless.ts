@@ -59,7 +59,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   functions: {
-    compute: {
+    nutriplan: {
       handler: "src/lambda.handler",
       events: [
         {
