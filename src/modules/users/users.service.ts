@@ -5,6 +5,7 @@ import { User } from '@nutriplan/types/user';
 import { Observable, throwError } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import * as crypto from 'crypto';
+import { Snowflake } from '@nutriplan/infrastructure/utils/Snowflake';
 
 @Injectable()
 export class UsersService {
@@ -33,16 +34,13 @@ export class UsersService {
           return throwError(() => new ConflictException('El correo electrónico ya está registrado.'));
         }
 
-        // 2. Hash password and build User object
-        const now = new Date().toISOString();
+        // 2. Hash password and build User object using Snowflake ID
         const newUser: User = {
-          id: dto.id,
+          id: Snowflake.generate(),
           email: dto.email,
           passwordHash: this.hashPassword(dto.password),
-          nombre: dto.nombre,
-          rol: dto.rol,
-          fechaCreacion: now,
-          fechaActualizacion: now,
+          name: dto.name,
+          role: dto.role,
         };
 
         // 3. Save to DynamoDB

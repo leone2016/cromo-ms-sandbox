@@ -25,9 +25,14 @@ export class DynamoGateway {
     );
   }
 
-  public put(data: object, table: string): Observable<boolean> {
+  public put(data: any, table: string): Observable<boolean> {
+    const now = new Date().toISOString();
     const params: DocumentClient.PutItemInput = {
-      Item: data,
+      Item: {
+        ...data,
+        createdAt: data.createdAt || now,
+        updatedAt: now,
+      },
       TableName: table,
     };
 

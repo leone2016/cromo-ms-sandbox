@@ -5,22 +5,19 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "id": {
-      "type": "number"
-    },
     "email": {
       "type": "string"
     },
     "password": {
       "type": "string"
     },
-    "nombre": {
+    "name": {
       "type": "string"
     },
-    "rol": {
+    "role": {
       "type": "string",
       "enum": ["Patient", "Coach"]
     }
   },
-  "required": ["id", "email", "password", "nombre", "rol"]
+  "required": ["email", "password", "name", "role"]
 }

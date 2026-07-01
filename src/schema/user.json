@@ -14,19 +14,19 @@
     "passwordHash": {
       "type": "string"
     },
-    "nombre": {
+    "name": {
       "type": "string"
     },
-    "rol": {
+    "role": {
       "type": "string",
       "enum": ["Patient", "Coach"]
     },
-    "fechaCreacion": {
+    "createdAt": {
       "type": "string"
     },
-    "fechaActualizacion": {
+    "updatedAt": {
       "type": "string"
     }
   },
-  "required": ["id", "email", "passwordHash", "nombre", "rol", "fechaCreacion", "fechaActualizacion"]
+  "required": ["id", "email", "passwordHash", "name", "role"]
 }
