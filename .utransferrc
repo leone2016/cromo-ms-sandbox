@@ -10,6 +10,6 @@
     ]
   },
   "ssm": {
-    "SANDBOX_ENTITY_TRXS":"SANDBOX_ENTITY_TRXS",
+    "SANDBOX_ENTITY_TRXS":"SANDBOX_ENTITY_TRXS"
   }
 }

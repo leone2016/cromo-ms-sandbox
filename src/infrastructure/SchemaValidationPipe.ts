@@ -1,6 +1,8 @@
 import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
 const Ajv = require('ajv-draft-04');
 import { SCHEMAS } from '../schema';
+import { ERRORS, ErrorCode } from './ErrorEnum';
+import { AppException } from './AppException';
 
 @Injectable()
 export class SchemaValidationPipe implements PipeTransform {
@@ -26,10 +28,11 @@ export class SchemaValidationPipe implements PipeTransform {
 
     const valid = validate(value);
     if (!valid) {
-      throw new BadRequestException({
-        message: 'Cuerpo de la petición inválido.',
-        errors: validate.errors,
-      });
+      throw new AppException(
+        ERRORS[ErrorCode.E001],
+        undefined,
+        validate.errors
+      );
     }
 
     return value;

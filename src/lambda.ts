@@ -15,6 +15,8 @@ async function bootstrap() {
       new ExpressAdapter(expressApp),
     );
     nestApp.enableCors();
+    const { AllExceptionsFilter } = require('./infrastructure/AllExceptionsFilter');
+    nestApp.useGlobalFilters(new AllExceptionsFilter());
     await nestApp.init();
     cachedServer = serverlessExpress({ app: expressApp });
   }
