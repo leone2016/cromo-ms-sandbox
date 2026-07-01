@@ -64,16 +64,16 @@ const serverlessConfiguration: AWS = {
       events: [
         {
           http: {
-            method: "post",
-            path: "health",
+            method: "any",
+            path: "/{proxy+}",
             cors: true
           }
         },
         {
           http: {
-            method: "get",
-            path: "health",
-            cors: false
+            method: "any",
+            path: "/",
+            cors: true
           }
         }
       ]
