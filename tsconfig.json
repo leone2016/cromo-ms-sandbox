@@ -12,10 +12,15 @@
       "error/*": ["src/error/*"],
       "gateway/*": ["src/gateway/*"],
       "infrastructure/*": ["src/infrastructure/*"],
+      "@nutriplan/infrastructure/*": ["src/infrastructure/*"],
+      "@nutriplan/schema": ["src/schema/index.ts"],
+      "@nutriplan/schema/*": ["src/schema/*"],
+      "@nutriplan/modules/*": ["src/modules/*"],
       "middleware/*": ["src/middleware/*"],
       "repository/*": ["src/repository/*"],
       "service/*": ["src/service/*"],
       "types/*": ["types/*"],
+      "@nutriplan/types/*": ["types/*"],
       "soap/*": ["src/soap/*"]
     }
   },

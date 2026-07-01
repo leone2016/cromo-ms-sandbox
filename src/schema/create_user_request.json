@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://utr/CreateUserRequest",
+  "title": "CreateUserRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "email": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "nombre": {
+      "type": "string"
+    },
+    "rol": {
+      "type": "string",
+      "enum": ["Patient", "Coach"]
+    }
+  },
+  "required": ["id", "email", "password", "nombre", "rol"]
+}

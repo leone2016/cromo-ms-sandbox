@@ -19,8 +19,30 @@ const serverlessConfiguration: AWS = {
     environment: {
       MS_STAGE: "${self:provider.stage}",
       MS_NAME: "${self:service}",
+      USERS_TABLE: "${self:provider.stage}-user",
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
+    },
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: "Allow",
+            Action: [
+              "dynamodb:GetItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem",
+              "dynamodb:Query",
+              "dynamodb:Scan"
+            ],
+            Resource: [
+              "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.stage}-user",
+              "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.stage}-user/index/*"
+            ]
+          }
+        ]
+      }
     },
   },
   package: {

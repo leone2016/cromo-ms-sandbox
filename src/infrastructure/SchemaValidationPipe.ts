@@ -1,6 +1,6 @@
 import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
 const Ajv = require('ajv-draft-04');
-import { SCHEMAS } from '../schema';
+import { SCHEMAS } from '@nutriplan/schema';
 import { ERRORS, ErrorCode } from './ErrorEnum';
 import { AppException } from './AppException';
 

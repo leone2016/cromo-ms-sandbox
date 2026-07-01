@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://utr/User",
+  "title": "User",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "email": {
+      "type": "string"
+    },
+    "passwordHash": {
+      "type": "string"
+    },
+    "nombre": {
+      "type": "string"
+    },
+    "rol": {
+      "type": "string",
+      "enum": ["Patient", "Coach"]
+    },
+    "fechaCreacion": {
+      "type": "string"
+    },
+    "fechaActualizacion": {
+      "type": "string"
+    }
+  },
+  "required": ["id", "email", "passwordHash", "nombre", "rol", "fechaCreacion", "fechaActualizacion"]
+}
