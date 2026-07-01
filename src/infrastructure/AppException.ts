@@ -1,5 +1,5 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
-const rcfile = require('rcfile');
+import { HttpException, HttpStatus } from "@nestjs/common";
+const rcfile = require("rcfile");
 
 export class AppException extends HttpException {
   public readonly code: string;
@@ -15,17 +15,17 @@ export class AppException extends HttpException {
   ) {
     let config: any = {};
     try {
-      config = rcfile('utransfer') || {};
+      config = rcfile("utransfer") || {};
     } catch (e) {
       // Fallback
     }
 
-    let prefix = 'E';
+    let prefix = "E";
     if (config.errorPrefix !== undefined) {
       prefix = config.errorPrefix;
     }
 
-    const cleanCodeNum = error.code.replace('E', '');
+    const cleanCodeNum = error.code.replace("E", "");
     const code = `${prefix}${cleanCodeNum}`;
     const name = `UTR-${cleanCodeNum}`;
     const errorMsg = message || error.message;

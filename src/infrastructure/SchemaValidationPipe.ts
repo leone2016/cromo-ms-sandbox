@@ -1,8 +1,13 @@
-import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
-const Ajv = require('ajv-draft-04');
-import { SCHEMAS } from '@nutriplan/schema';
-import { ERRORS, ErrorCode } from './ErrorEnum';
-import { AppException } from './AppException';
+import {
+  PipeTransform,
+  Injectable,
+  ArgumentMetadata,
+  BadRequestException,
+} from "@nestjs/common";
+const Ajv = require("ajv-draft-04");
+import { SCHEMAS } from "@nutriplan/schema";
+import { ERRORS, ErrorCode } from "./ErrorEnum";
+import { AppException } from "./AppException";
 
 @Injectable()
 export class SchemaValidationPipe implements PipeTransform {
@@ -10,7 +15,7 @@ export class SchemaValidationPipe implements PipeTransform {
 
   constructor(private schemaName: string) {
     this.ajv = new Ajv({ allErrors: true });
-    
+
     // Load the target schema
     const schema = SCHEMAS[this.schemaName];
     if (schema) {
@@ -19,8 +24,8 @@ export class SchemaValidationPipe implements PipeTransform {
   }
 
   transform(value: any, metadata: ArgumentMetadata) {
-    if (metadata.type !== 'body') return value;
-    
+    if (metadata.type !== "body") return value;
+
     const validate = this.ajv.getSchema(this.schemaName);
     if (!validate) {
       throw new BadRequestException(`Schema ${this.schemaName} not found`);

@@ -1,11 +1,14 @@
-import { Controller, Get, Inject } from '@nestjs/common';
-import { EvaluationService } from './evaluation.service';
+import { Controller, Get, Inject } from "@nestjs/common";
+import { EvaluationService } from "./evaluation.service";
 
-@Controller('evaluation')
+@Controller("evaluation")
 export class EvaluationController {
-  constructor(@Inject(EvaluationService) private readonly evaluationService: EvaluationService) {}
+  constructor(
+    @Inject(EvaluationService)
+    private readonly evaluationService: EvaluationService
+  ) {}
 
-  @Get('health')
+  @Get("health")
   getHello() {
     return this.evaluationService.getHello();
   }

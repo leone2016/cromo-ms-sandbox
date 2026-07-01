@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { UsersModule } from './modules/users/users.module';
-import { PatientsModule } from './modules/patients/patients.module';
-import { NutritionalPlanModule } from './modules/nutritional-plan/nutritional-plan.module';
-import { EvaluationModule } from './modules/evaluation/evaluation.module';
-import { DatabaseModule } from './infrastructure/database/database.module';
+import { Module } from "@nestjs/common";
+import { UsersModule } from "./modules/users/users.module";
+import { PatientsModule } from "./modules/patients/patients.module";
+import { NutritionalPlanModule } from "./modules/nutritional-plan/nutritional-plan.module";
+import { EvaluationModule } from "./modules/evaluation/evaluation.module";
+import { DatabaseModule } from "./infrastructure/database/database.module";
 
 @Module({
   imports: [

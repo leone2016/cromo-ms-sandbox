@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import * as AWS from 'aws-sdk';
-import { DocumentClient, GetItemOutput, Key } from 'aws-sdk/clients/dynamodb';
-import { Observable, of } from 'rxjs';
-import { map, mapTo, switchMap } from 'rxjs/operators';
-import { DynamoUpdateActionsEnum } from './DynamoUpdateActionsEnum';
+import { Injectable } from "@nestjs/common";
+import * as AWS from "aws-sdk";
+import { DocumentClient, GetItemOutput, Key } from "aws-sdk/clients/dynamodb";
+import { Observable, of } from "rxjs";
+import { map, mapTo, switchMap } from "rxjs/operators";
+import { DynamoUpdateActionsEnum } from "./DynamoUpdateActionsEnum";
 
 @Injectable()
 export class DynamoGateway {
@@ -38,7 +38,7 @@ export class DynamoGateway {
 
     return this._put(params);
   }
-   private _put(params: DocumentClient.PutItemInput): Observable<boolean> {
+  private _put(params: DocumentClient.PutItemInput): Observable<boolean> {
     return of(1).pipe(
       switchMap(async () => this._client.put(params).promise()),
       mapTo(true)
@@ -58,7 +58,7 @@ export class DynamoGateway {
             [`#${queryParams.field}`]: queryParams.field,
           },
           ExpressionAttributeValues: {
-            ':d': queryParams.value,
+            ":d": queryParams.value,
           },
           KeyConditionExpression: `#${queryParams.field} = :d`,
           TableName: queryParams.table,
@@ -81,7 +81,13 @@ export class DynamoGateway {
     field: string,
     newValue?: T
   ): Observable<boolean> {
-    const updateInput = this._getUpdateInput<T>(action, table, key, field, newValue);
+    const updateInput = this._getUpdateInput<T>(
+      action,
+      table,
+      key,
+      field,
+      newValue
+    );
 
     return of(1).pipe(
       switchMap(async () => this._client.update(updateInput).promise()),
@@ -101,8 +107,6 @@ export class DynamoGateway {
     );
   }
 
- 
-
   private _getUpdateInput<K>(
     action: DynamoUpdateActionsEnum,
     table: string,
@@ -121,7 +125,7 @@ export class DynamoGateway {
     } else {
       updateInput = {
         ExpressionAttributeValues: {
-          ':a': newValue,
+          ":a": newValue,
         },
         Key: <Key>key,
         TableName: table,

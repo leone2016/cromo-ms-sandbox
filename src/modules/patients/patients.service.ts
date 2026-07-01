@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class PatientsService {
   getHello() {
-    return { message: 'patients health', ms: process.env.MS_NAME || 'sandbox' };
+    return { message: "patients health", ms: process.env.MS_NAME || "sandbox" };
   }
 }

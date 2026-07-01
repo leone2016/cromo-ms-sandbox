@@ -1,4 +1,8 @@
 import type { AWS } from "@serverless/typescript";
+import users from "./src/modules/users/users.serverless";
+import patients from "./src/modules/patients/patients.serverless";
+import nutritionalPlan from "./src/modules/nutritional-plan/nutritional-plan.serverless";
+import evaluation from "./src/modules/evaluation/evaluation.serverless";
 
 const serverlessConfiguration: AWS = {
   service: "sandbox",
@@ -34,23 +38,21 @@ const serverlessConfiguration: AWS = {
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem",
               "dynamodb:Query",
-              "dynamodb:Scan"
+              "dynamodb:Scan",
             ],
             Resource: [
               "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.stage}-user",
-              "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.stage}-user/index/*"
-            ]
-          }
-        ]
-      }
+              "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:provider.stage}-user/index/*",
+            ],
+          },
+        ],
+      },
     },
   },
   package: {
     individually: true,
     excludeDevDependencies: true,
-    patterns: [
-      "src/schema/**"
-    ]
+    patterns: ["src/schema/**"],
   },
   custom: {
     version: "v1",
@@ -76,30 +78,15 @@ const serverlessConfiguration: AWS = {
         "@nestjs/websockets",
         "cache-manager",
         "class-transformer",
-        "class-validator"
-      ]
+        "class-validator",
+      ],
     },
   },
   functions: {
-    nutriplan: {
-      handler: "src/lambda.handler",
-      events: [
-        {
-          http: {
-            method: "any",
-            path: "/{proxy+}",
-            cors: true
-          }
-        },
-        {
-          http: {
-            method: "any",
-            path: "/",
-            cors: true
-          }
-        }
-      ]
-    }
+    users,
+    patients,
+    nutritionalPlan,
+    evaluation,
   },
 };
 
