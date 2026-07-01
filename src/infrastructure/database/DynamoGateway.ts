@@ -33,6 +33,12 @@ export class DynamoGateway {
 
     return this._put(params);
   }
+   private _put(params: DocumentClient.PutItemInput): Observable<boolean> {
+    return of(1).pipe(
+      switchMap(async () => this._client.put(params).promise()),
+      mapTo(true)
+    );
+  }
 
   public query<T>(queryParams: {
     table: string;
@@ -90,12 +96,7 @@ export class DynamoGateway {
     );
   }
 
-  private _put(params: DocumentClient.PutItemInput): Observable<boolean> {
-    return of(1).pipe(
-      switchMap(async () => this._client.put(params).promise()),
-      mapTo(true)
-    );
-  }
+ 
 
   private _getUpdateInput<K>(
     action: DynamoUpdateActionsEnum,
